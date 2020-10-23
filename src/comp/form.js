@@ -5,7 +5,7 @@ const Formulario = (props) => {
   const { handleChange, handleSubmit, errors } = useForm(
     validateForm,
     props.initialValues,
-    props.validators
+    props.fields.map((item) => {return { name: item.name, validators: item.validators };})
   );
   const fieldHTML = props.fields.map((field) => (
     <div className="form-group">
@@ -15,7 +15,9 @@ const Formulario = (props) => {
         name={field.name}
         className="form-control"
         id={field.name}
+        onChange = {handleChange}
       />
+      {errors[field.name] && <p>{errors[field.name]}</p>}
     </div>
   ));
   return (
@@ -30,7 +32,7 @@ const Formulario = (props) => {
           <div>
             <form onSubmit={handleSubmit}>
               {fieldHTML}
-              <button type="submit">Enviar</button>
+              <button type="submit" className="btn btn-danger">Enviar</button>
             </form>
           </div>
         </div>

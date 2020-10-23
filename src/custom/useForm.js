@@ -1,5 +1,6 @@
 import { useState } from "react";
 const useForm = (validateForm, initialValues, validators) => {
+  console.log(validators);
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialValues);
   const handleChange = (evt) => {
